@@ -1,8 +1,8 @@
 /******************************************************************************
  * Spine Runtimes License Agreement
- * Last updated January 1, 2020. Replaces all prior versions.
+ * Last updated September 24, 2021. Replaces all prior versions.
  *
- * Copyright (c) 2013-2020, Esoteric Software LLC
+ * Copyright (c) 2013-2021, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -29,32 +29,33 @@
 
 #pragma once
 
-#include "SlateCore.h"
 #include "Slate/SMeshWidget.h"
-#include <spine/spine.h>
+#include "SlateCore.h"
 #include "SpineAtlasAsset.h"
+#include <spine/spine.h>
 
 class USpineWidget;
 
-class SSpineWidget: public SMeshWidget {
+class SSpineWidget : public SMeshWidget {
 
 public:
-	SLATE_BEGIN_ARGS(SSpineWidget): _MeshData(nullptr) { }
-	SLATE_ARGUMENT(USlateVectorArtData*, MeshData)
+	SLATE_BEGIN_ARGS(SSpineWidget) : _MeshData(nullptr) {}
+	SLATE_ARGUMENT(USlateVectorArtData *, MeshData)
 	SLATE_END_ARGS()
 
-	void Construct(const FArguments& Args);
+	void Construct(const FArguments &Args);
 
-	void SetData(USpineWidget* Widget);
-	FSlateBrush* brush;
+	void SetData(USpineWidget *Widget);
+	FSlateBrush *brush;
+
 protected:
-	virtual int32 OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const override;
+	virtual int32 OnPaint(const FPaintArgs &Args, const FGeometry &AllottedGeometry, const FSlateRect &MyCullingRect, FSlateWindowElementList &OutDrawElements, int32 LayerId, const FWidgetStyle &InWidgetStyle, bool bParentEnabled) const override;
 
-	void UpdateMesh(int32 LayerId, FSlateWindowElementList& OutDrawElements, const FGeometry& AllottedGeometry, spine::Skeleton* Skeleton);
+	void UpdateMesh(int32 LayerId, FSlateWindowElementList &OutDrawElements, const FGeometry &AllottedGeometry, spine::Skeleton *Skeleton);
 
-	void Flush(int32 LayerId, FSlateWindowElementList& OutDrawElements, const FGeometry& AllottedGeometry, int &Idx, TArray<FVector> &Vertices, TArray<int32> &Indices, TArray<FVector2D> &Uvs, TArray<FColor> &Colors, TArray<FVector> &Colors2, UMaterialInstanceDynamic* Material);
+	void Flush(int32 LayerId, FSlateWindowElementList &OutDrawElements, const FGeometry &AllottedGeometry, int &Idx, TArray<FVector> &Vertices, TArray<int32> &Indices, TArray<FVector2D> &Uvs, TArray<FColor> &Colors, TArray<FVector> &Colors2, UMaterialInstanceDynamic *Material);
 
-	USpineWidget* widget;	
+	USpineWidget *widget;
 	FRenderData renderData;
 	FVector boundsMin;
 	FVector boundsSize;

@@ -60,11 +60,16 @@ void SSpineWidget::Construct(const FArguments& args) {
 void SSpineWidget::SetData(USpineWidget* Widget) {
 	this->widget = Widget;
 	if (widget && widget->skeleton && widget->Atlas) {
-		Skeleton *skeleton = widget->skeleton;
+		Skeleton* skeleton = widget->skeleton;
 		skeleton->setToSetupPose();
 		skeleton->updateWorldTransform();
 		Vector<float> scratchBuffer;
-		skeleton->getBounds(this->boundsMin.X, this->boundsMin.Y, this->boundsSize.X, this->boundsSize.Y, scratchBuffer);
+		float x, y, w, h;
+		skeleton->getBounds(x, y, w, h, scratchBuffer);
+		boundsMin.X = x;
+		boundsMin.Y = y;
+		boundsSize.X = w;
+		boundsSize.Y = h;
 	}
 }
 
